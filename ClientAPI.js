@@ -64,11 +64,39 @@ var Sdk = window.Sdk || {};
     }
 
    
-  }).call(Sdk);
+}).call(Sdk);
+
+
+//NOTIFICATIONS WITH JAVASCRIPT 
+//1.FORM NOTIFICATION   2. FIELD NOTIFICATION
+// when the formNotification is on your will able to save the form still, but when field notification was on you cat save the form
+// when you set up field notification you have to set up the clear it after words using "if else" statemenst 
+
+//FormNotification
+to set = formContext.ui.setFormNotification(message, level, uniqueid);
+
+to delete = formContext.ui.clearFormNotification(message, level, uniqueid);
+//message= display message
+//level=INFO, ERROR, WARNNING  Levels
+//uniqueID= use when desebeling Notifications.
+
+//FIELDnotifications
+to set = formContext.getControl("attribute").setNotification(message, uniqueid);
+
+to delete = formContext.getControl("attribute").clearNotification(message, uniqueid);
 
 
 
+                  /*Disable Auto Save for Entity using JavaScript*/
 
+// use below function for Disable auto-save for a form in spesific entity
+
+function preventAutoSave(econtext) {
+    var eventArgs = econtext.getEventArgs();
+    if (eventArgs.getSaveMode() == 70 || eventArgs.getSaveMode() == 2) {
+        eventArgs.preventDefault();
+    }
+}
 
 
 
