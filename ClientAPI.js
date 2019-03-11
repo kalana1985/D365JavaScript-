@@ -99,6 +99,35 @@ function preventAutoSave(econtext) {
 }
 
 
+//Handling Option sets using JavaScript 
+var Sdk = window.Sdk || {};
+(function () {
+
+    //this code will return form onLoad event
+    this.formOnload = function (executionContext) {
+        //when using in event handler use  :  Sdk.formOnlode, as the function name
+    }
+
+    this.shippingMethordOnChange = function(executionContext) {
+        //using on event handler = Sdk.formOnSave
+        var formContext = executionContext.getFormContext();
+        var shippingmethord = formContext.getAttribute("address1_shippingmethodcode").getText();// returen the string value 
+
+        if (shippingmethord == "FedEx") {
+
+            formContext.getControl("address1_freighttermscode").setDisabled(true);
+        } else {
+
+            formContext.getControl("address1_freighttermscode").setDisabled(false);
+
+
+        }
+
+    }
+
+
+}).call(Sdk);
+
 
 
 
