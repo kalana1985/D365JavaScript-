@@ -129,6 +129,58 @@ var Sdk = window.Sdk || {};
 }).call(Sdk);
 
 
+//Form Type
+
+formContext.ui.getFormType();
+
+/*Microsoft have defines the form types, for example form onSave will fire when you open an excisting record as well as the 
+ * when you creating a new record, lest say you have to make some validation only when new record is created,not when exsisting 
+ * record is opening .*/
+
+Value	Form type
+0	Undefined
+1	Create
+2	Update
+3	Read Only
+4	Disabled
+6	Bulk Edit
+
+Note
+
+Quick Create forms return 1.
+
+
+// JavaScript source code for get Fork Type
+var Sdk = window.Sdk || {};
+(function () {
+
+    //this code will return form onLoad event
+    this.formOnload = function (executionContext) {
+        //when using in event handler use  :  Sdk.formOnlode, as the function name
+        var formContext = executionContext.getFormContext();
+        var getFormType = formContext.ui.getFormType();// this return the intiget value 
+
+        if (getFormType == 1) {
+            formContext.ui.setFormNotification("user is creating a new record", "INFO", "test1");
+
+        } else if (getFormType == 2) {
+
+            formContext.ui.setFormNotification("user is editing exsicting record ", "INFO", "test2");
+        } else if (getFormType == 3) {
+            formContext.ui.setFormNotification("user dont have permission to edit any record  ", "INFO", "test3");
+
+        }
+
+    }
+
+    this.formOnSave = function (executionContext) {
+        //using on event handler = Sdk.formOnSave
+
+    }
+
+
+}).call(Sdk);
+
 
 
 
